@@ -1,0 +1,99 @@
+--- nss_db-2.2.3pre1/src/db-XXX.c.orig	2001-04-30 03:07:41.000000000 +0200
++++ nss_db-2.2.3pre1/src/db-XXX.c	2004-04-02 23:51:28.467862480 +0200
+@@ -24,7 +24,7 @@
+ #include <stdio.h>
+ #include <string.h>
+ 
+-#include <bits/libc-lock.h>
++#include "libc-lock.h"
+ 
+ #include "nss_db.h"
+ 
+--- nss_db-2.2.3pre1/src/db-alias.c.orig	2001-04-30 03:07:41.000000000 +0200
++++ nss_db-2.2.3pre1/src/db-alias.c	2004-04-02 23:51:43.827527456 +0200
+@@ -26,7 +26,7 @@
+ #include <stdio.h>
+ #include <string.h>
+ 
+-#include <bits/libc-lock.h>
++#include "libc-lock.h"
+ 
+ #include "nss_db.h"
+ 
+--- nss_db-2.2.3pre1/src/db-netgrp.c.orig	2001-04-30 03:07:41.000000000 +0200
++++ nss_db-2.2.3pre1/src/db-netgrp.c	2004-04-02 23:51:55.586739784 +0200
+@@ -22,7 +22,7 @@
+ #include <fcntl.h>
+ #include <netgroup.h>
+ #include <string.h>
+-#include <bits/libc-lock.h>
++#include "libc-lock.h"
+ #include <paths.h>
+ 
+ #include "nss_db.h"
+--- nss_db-2.2.3pre1/src/Makefile.am.orig	2004-04-02 23:46:06.000000000 +0200
++++ nss_db-2.2.3pre1/src/Makefile.am	2004-04-02 23:54:15.053537608 +0200
+@@ -11,7 +11,7 @@
+ 
+ noinst_HEADERS = db-compat.h netgroup.h nss_db.h
+ 
+-INCLUDES = @DB_CFLAGS@ -D_LIBC -D_GNU_SOURCE \
++INCLUDES = @DB_CFLAGS@ -D_GNU_SOURCE \
+ 	-I../intl -DLOCALEDIR=\"$(localedir)\"
+ 
+ EXTRA_DIST = libnss_db.map
+@@ -25,7 +25,7 @@
+ libnss_db_la_LDFLAGS = -version-info $(INTERFACE) \
+ 	 -Wl,--version-script=$(srcdir)/libnss_db.map
+ libnss_db_la_DEPENDENCIES = libnss_db.map
+-libnss_db_la_LIBADD = @DB_LIBS@ -lnss_files
++libnss_db_la_LIBADD = @DB_LIBS@ $(slibdir)/libnss_files.so.2
+ 
+ bin_PROGRAMS = makedb
+ makedb_SOURCES = makedb.c
+--- nss_db-2.2.3pre1/src/libc-lock.h.orig	1970-01-01 01:00:00.000000000 +0100
++++ nss_db-2.2.3pre1/src/libc-lock.h	2004-04-02 23:53:23.534369712 +0200
+@@ -0,0 +1,43 @@
++/* libc-internal interface for mutex locks.  LinuxThreads version.
++   Adapted for nss_db.
++   Copyright (C) 1996,1997,1998,1999,2000,2001,2002
++   Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public License as
++   published by the Free Software Foundation; either version 2.1 of the
++   License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; see the file COPYING.LIB.  If not,
++   write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
++   Boston, MA 02111-1307, USA.  */
++
++#ifndef LIBC_LOCK_H
++#define LIBC_LOCK_H
++
++#include <pthread.h>
++
++typedef pthread_mutex_t __libc_lock_t;
++
++#if __LT_SPINLOCK_INIT == 0
++#  define __libc_lock_define_initialized(CLASS,NAME) \
++  CLASS pthread_mutex_t NAME;
++#else
++#  define __libc_lock_define_initialized(CLASS,NAME) \
++  CLASS pthread_mutex_t NAME = PTHREAD_MUTEX_INITIALIZER;
++#endif
++
++/* Lock the named lock variable.  */
++#define __libc_lock_lock(NAME) pthread_mutex_lock (&(NAME));
++
++/* Unlock the named lock variable.  */
++#define __libc_lock_unlock(NAME) pthread_mutex_unlock (&(NAME));
++
++#endif	/* bits/libc-lock.h */
