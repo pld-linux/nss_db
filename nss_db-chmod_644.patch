@@ -1,0 +1,57 @@
+diff -urN nss_db-2.2.orig/db-Makefile nss_db-2.2/db-Makefile
+--- nss_db-2.2.orig/db-Makefile	Tue Aug  8 19:42:27 2000
++++ nss_db-2.2/db-Makefile	Sun Feb 11 14:32:09 2001
+@@ -38,6 +38,7 @@
+ 		 /^[^#]/ { printf ".%s ", $$1; print; \
+ 			   printf "=%s ", $$3; print }' $^ | \
+ 	$(MAKEDB) -o $@ -
++	chmod 644 $@
+ 	@echo "done."
+ 
+ $(VAR_DB)/group.db: /etc/group
+@@ -49,6 +50,7 @@
+ 		 /^[^#]/ { printf ".%s ", $$1; print; \
+ 			   printf "=%s ", $$3; print }' $^ | \
+ 	$(MAKEDB) -o $@ -
++	chmod 644 $@
+ 	@echo "done."
+ 
+ $(VAR_DB)/ethers.db: /etc/ethers
+@@ -60,6 +62,7 @@
+ 		 /^[^#]/ { printf ".%s ", $$1; print; \
+ 			   printf "=%s ", $$2; print }' $^ | \
+ 	$(MAKEDB) -o $@ -
++	chmod 644 $@
+ 	@echo "done."
+ 
+ $(VAR_DB)/protocols.db: /etc/protocols
+@@ -73,6 +76,7 @@
+ 			   for (i = 3; i <= NF && !($$i ~ /^#/); ++i) \
+ 			     { printf ".%s ", $$i; print } }' $^ | \
+ 	$(MAKEDB) -o $@ -
++	chmod 644 $@
+ 	@echo "done."
+ 
+ $(VAR_DB)/rpc.db: /etc/rpc
+@@ -86,6 +90,7 @@
+ 			   for (i = 3; i <= NF && !($$i ~ /^#/); ++i) \
+ 			     { printf ".%s ", $$i; print } }' $^ | \
+ 	$(MAKEDB) -o $@ -
++	chmod 644 $@
+ 	@echo "done."
+ 
+ $(VAR_DB)/services.db: /etc/services
+@@ -102,6 +107,7 @@
+ 			     { printf ".%s/%s ", $$i, $$3; print; \
+ 			       printf ".%s/ ", $$i; print } }' $^ | \
+ 	$(MAKEDB) -o $@ -
++	chmod 644 $@
+ 	@echo "done."
+ 
+ $(VAR_DB)/shadow.db: /etc/shadow
+@@ -135,4 +141,5 @@
+ 			   gsub(/[ \t]+/, " "); \
+ 			   if(end == 1) printf "%s", $$0; else print }' $^ | \
+ 	$(MAKEDB) -o $@ -
++	chmod 644 $@
+ 	@echo "done."
