@@ -1,6 +1,14 @@
---- nss_db-2.2/Makefile.am.orig	Tue Aug 15 16:18:16 2000
-+++ nss_db-2.2/Makefile.am	Sat Oct 20 16:44:18 2001
-@@ -33,7 +33,7 @@
+--- nss_db-2.2.3pre1/src/Makefile.am.orig	2001-04-30 03:19:31.000000000 +0200
++++ nss_db-2.2.3pre1/src/Makefile.am	2004-04-02 23:45:50.158293352 +0200
+@@ -28,13 +28,13 @@
+ libnss_db_la_LIBADD = @DB_LIBS@ -lnss_files
+ 
+ bin_PROGRAMS = makedb
+-makedb_SOURCES = makedb.c db-compat.c
+-makedb_LDADD = @DB_LIBS@ @INTLLIBS@
++makedb_SOURCES = makedb.c
++makedb_LDADD = db-compat.lo @DB_LIBS@ @INTLLIBS@
+ 
  # To mimmick the old glibc installation as closely as possible, we
  # shuffle the installed library and the links to it around a bit,
  # removing all traces from libtool in the process.
