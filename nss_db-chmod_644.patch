@@ -53,5 +53,5 @@ diff -urN nss_db-2.2.orig/db-Makefile nss_db-2.2/db-Makefile
  			   gsub(/[ \t]+/, " "); \
  			   if(end == 1) printf "%s", $$0; else print }' $^ | \
  	$(MAKEDB) -o $@ -
-+	chmod 644 $@
++	chmod 640 $@
  	@echo "done."
