@@ -1,4 +1,4 @@
-# $Revision: 1.12 $Date: 2002-02-22 23:29:20 $
+# $Revision: 1.13 $Date: 2002-02-23 04:05:42 $
 Summary:	Berkeley DB Name Service Switch Module
 Summary(pl):	Modu³ NSS do baz db
 Name:		nss_db
@@ -11,14 +11,14 @@ Patch0:		%{name}-chmod_644.patch
 Patch1:		%{name}-amfix.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	db3-devel 
+BuildRequires:	db3-devel
 BuildRequires:	glibc-devel >= 2.2
 BuildRequires:	libtool
 Requires:	glibc >= 2.2
 Requires:	make
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%description 
+%description
 This is nss_db, a name service switch module that can be used with
 glibc-2.2.x.
 
