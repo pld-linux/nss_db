@@ -1,4 +1,4 @@
-# $Revision: 1.3 $Date: 2000-11-10 17:40:47 $
+# $Revision: 1.4 $Date: 2000-11-12 03:38:18 $
 Summary:	Berkeley DB Name Service Switch Module
 Name:		nss_db
 Version:	2.2
@@ -9,6 +9,8 @@ Group(de):	Gründsätzlich
 Group(pl):	Podstawowe
 Source0:	ftp://sources.redhat.com/pub/glibc/releases/%{name}-%{version}.tar.gz
 BuildRequires:	db3-devel 
+BuildRequires:	glibc-devel >= 2.2
+Requires:	glibc >= 2.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description 
@@ -38,9 +40,6 @@ EOF
 
 ln -sf create-db $RPM_BUILD_ROOT%{_bindir}/update-db
 
-strip --strip-unneeded $RPM_BUILD_ROOT/lib/*
-strip --strip-unneeded $RPM_BUILD_ROOT%{_bindir}/makedb
-
 gzip -9nf AUTHORS ChangeLog README NEWS THANKS
 
 %post   -p /sbin/ldconfig
@@ -51,7 +50,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {AUTHORS,ChangeLog,README,NEWS,THANKS}.gz
+%doc *.gz
 %attr(755,root,root) /lib/*.so
 %attr(755,root,root) %{_bindir}/*
 %config /var/db/Makefile
