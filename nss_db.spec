@@ -1,5 +1,6 @@
-# $Revision: 1.5 $Date: 2001-02-11 18:53:57 $
+# $Revision: 1.6 $Date: 2001-02-11 19:48:39 $
 Summary:	Berkeley DB Name Service Switch Module
+Summary(pl):	Modu³ NSS do baz db
 Name:		nss_db
 Version:	2.2
 Release:	2
@@ -9,10 +10,10 @@ Group(de):	Gründsätzlich
 Group(pl):	Podstawowe
 Source0:	ftp://sources.redhat.com/pub/glibc/releases/%{name}-%{version}.tar.gz
 Patch0:		%{name}-chmod_644.patch
-BuildRequires:	db3-devel 
-BuildRequires:	glibc-devel >= 2.2
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	db3-devel 
+BuildRequires:	glibc-devel >= 2.2
 Requires:	glibc >= 2.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
