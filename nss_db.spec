@@ -1,4 +1,4 @@
-# $Revision: 1.13 $Date: 2002-02-23 04:05:42 $
+# $Revision: 1.14 $Date: 2002-03-24 23:28:22 $
 Summary:	Berkeley DB Name Service Switch Module
 Summary(pl):	Modu³ NSS do baz db
 Name:		nss_db
@@ -36,7 +36,7 @@ rm -f missing
 libtoolize --copy --force
 aclocal
 autoconf
-automake -a -c
+automake -a -c -f
 %configure
 %{__make}
 
