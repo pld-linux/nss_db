@@ -13,6 +13,9 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	db-devel
 BuildRequires:	glibc-devel >= 2.2
+#BuildRequires:	libstdc++-devel
+#BuildRequires:	gcc-c++
+#Buildrequires:	lwp-devel
 BuildRequires:	libtool
 Requires:	glibc >= 2.2
 Requires:	make
