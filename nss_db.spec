@@ -12,6 +12,7 @@ Patch0:		%{name}-chmod_644.patch
 Patch1:		%{name}-amfix.patch
 Patch2:		%{name}-glibc23.patch
 Patch3:		%{name}-db41.patch
+Patch4:		%{name}-errno.patch
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4
 BuildRequires:	db-devel >= 3.0
@@ -36,6 +37,7 @@ glibc-2.2.x.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__gettextize}
