@@ -1,15 +1,18 @@
-# $Revision: 1.9 $Date: 2001-09-18 20:27:04 $
+# $Revision: 1.10 $Date: 2001-10-20 16:50:33 $
 Summary:	Berkeley DB Name Service Switch Module
 Summary(pl):	Modu³ NSS do baz db
 Name:		nss_db
 Version:	2.2
-Release:	7
+Release:	8
 License:	LGPL
 Group:		Base
 Group(de):	Gründsätzlich
+Group(es):	Base
 Group(pl):	Podstawowe
+Group(pt_BR):	Base
 Source0:	ftp://sources.redhat.com/pub/glibc/releases/%{name}-%{version}.tar.gz
 Patch0:		%{name}-chmod_644.patch
+Patch1:		%{name}-amfix.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	db3-devel 
@@ -21,11 +24,16 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description 
 This is nss_db, a name service switch module that can be used with
-glibc-2.2.xx.
+glibc-2.2.x.
+
+%description -l pl
+To jest nss_db, modu³ do serwisu nazw, który mo¿e byæ u¿ywany z
+glibc-2.2.x.
 
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 rm -f missing
@@ -54,11 +62,11 @@ ln -sf create-db $RPM_BUILD_ROOT%{_bindir}/update-db
 
 gzip -9nf AUTHORS ChangeLog README NEWS THANKS
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)

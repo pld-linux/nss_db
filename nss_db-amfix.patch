@@ -1,0 +1,11 @@
+--- nss_db-2.2/Makefile.am.orig	Tue Aug 15 16:18:16 2000
++++ nss_db-2.2/Makefile.am	Sat Oct 20 16:44:18 2001
+@@ -33,7 +33,7 @@
+ # To mimmick the old glibc installation as closely as possible, we
+ # shuffle the installed library and the links to it around a bit,
+ # removing all traces from libtool in the process.
+-install-data-local:
++install-data-hook:
+ 	$(mkinstalldirs) $(DESTDIR)$(libdir)
+ 	rm $(DESTDIR)$(slibdir)/libnss_db.la
+ 	rm $(DESTDIR)$(slibdir)/libnss_db.so
