@@ -1,4 +1,3 @@
-# $Revision: 1.21 $Date: 2003-05-28 12:59:55 $
 Summary:	Berkeley DB Name Service Switch Module
 Summary(pl):	Modu³ NSS do baz db
 Name:		nss_db
