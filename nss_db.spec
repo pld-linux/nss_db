@@ -1,4 +1,4 @@
-# $Revision: 1.11 $Date: 2002-01-18 02:14:03 $
+# $Revision: 1.12 $Date: 2002-02-22 23:29:20 $
 Summary:	Berkeley DB Name Service Switch Module
 Summary(pl):	Modu³ NSS do baz db
 Name:		nss_db
@@ -6,10 +6,6 @@ Version:	2.2
 Release:	8
 License:	LGPL
 Group:		Base
-Group(de):	Gründsätzlich
-Group(es):	Base
-Group(pl):	Podstawowe
-Group(pt_BR):	Base
 Source0:	ftp://sources.redhat.com/pub/glibc/releases/%{name}-%{version}.tar.gz
 Patch0:		%{name}-chmod_644.patch
 Patch1:		%{name}-amfix.patch
