@@ -1,4 +1,4 @@
-# $Revision: 1.17 $Date: 2002-10-09 13:14:41 $
+# $Revision: 1.18 $Date: 2002-11-27 22:06:25 $
 Summary:	Berkeley DB Name Service Switch Module
 Summary(pl):	Modu³ NSS do baz db
 Name:		nss_db
@@ -56,8 +56,6 @@ EOF
 
 ln -sf create-db $RPM_BUILD_ROOT%{_bindir}/update-db
 
-gzip -9nf AUTHORS ChangeLog README NEWS THANKS
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -66,7 +64,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS ChangeLog README NEWS THANKS
 %attr(755,root,root) /lib/*.so
 %attr(755,root,root) %{_bindir}/*
 %config /var/db/Makefile
