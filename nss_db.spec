@@ -45,13 +45,15 @@ glibc-2.2.x.
 %{__autoheader}
 %{__automake}
 %configure
-%{__make}
+%{__make} \
+	slibdir=/%{_lib}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/%{_lib},/var/db}
 
 %{__make} install \
+	slibdir=/%{_lib} \
 	DESTDIR=$RPM_BUILD_ROOT
 
 install db-Makefile $RPM_BUILD_ROOT/var/db/Makefile
