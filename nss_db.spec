@@ -1,13 +1,13 @@
-# $Revision: 1.2 $Date: 2000-10-03 22:10:00 $
+# $Revision: 1.3 $Date: 2000-11-10 17:40:47 $
 Summary:	Berkeley DB Name Service Switch Module
 Name:		nss_db
-Version:	2.1.92
+Version:	2.2
 Release:	1
 License:	LGPL
 Group:		Base
 Group(de):	Gründsätzlich
 Group(pl):	Podstawowe
-Source0:	ftp://sourceware.cygnus.com/pub/glibc/releases/%{name}-%{version}.tar.gz
+Source0:	ftp://sources.redhat.com/pub/glibc/releases/%{name}-%{version}.tar.gz
 BuildRequires:	db3-devel 
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
