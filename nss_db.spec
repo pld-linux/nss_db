@@ -1,4 +1,4 @@
-# $Revision: 1.7 $Date: 2001-08-09 16:48:27 $
+# $Revision: 1.8 $Date: 2001-08-09 16:57:06 $
 Summary:	Berkeley DB Name Service Switch Module
 Summary(pl):	Modu³ NSS do baz db
 Name:		nss_db
@@ -14,7 +14,9 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	db3-devel 
 BuildRequires:	glibc-devel >= 2.2
+BuildRequires:	libtool
 Requires:	glibc >= 2.2
+Requires:	make
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description 
@@ -26,6 +28,7 @@ glibc-2.2.xx.
 %patch0 -p1
 
 %build
+libtoolize --copy --force
 aclocal
 autoconf
 automake -a -c
