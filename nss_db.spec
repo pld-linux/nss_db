@@ -1,4 +1,4 @@
-# $Revision: 1.20 $Date: 2003-05-25 05:51:13 $
+# $Revision: 1.21 $Date: 2003-05-28 12:59:55 $
 Summary:	Berkeley DB Name Service Switch Module
 Summary(pl):	Modu³ NSS do baz db
 Name:		nss_db
@@ -7,6 +7,7 @@ Release:	8
 License:	LGPL
 Group:		Base
 Source0:	ftp://sources.redhat.com/pub/glibc/releases/%{name}-%{version}.tar.gz
+# Source0-md5:	c2565cbd4a941ba70e41391693c3252d
 Patch0:		%{name}-chmod_644.patch
 Patch1:		%{name}-amfix.patch
 BuildRequires:	autoconf
