@@ -1,4 +1,4 @@
-# $Revision: 1.18 $Date: 2002-11-27 22:06:25 $
+# $Revision: 1.19 $Date: 2003-04-16 11:15:54 $
 Summary:	Berkeley DB Name Service Switch Module
 Summary(pl):	Modu³ NSS do baz db
 Name:		nss_db
@@ -11,7 +11,7 @@ Patch0:		%{name}-chmod_644.patch
 Patch1:		%{name}-amfix.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	db3-devel
+BuildRequires:	db-devel
 BuildRequires:	glibc-devel >= 2.2
 BuildRequires:	libtool
 Requires:	glibc >= 2.2
