@@ -3,7 +3,7 @@ Summary(pl):	Modu³ NSS do baz db
 Name:		nss_db
 Version:	2.2.3
 %define	bver	pre1
-Release:	0.%{bver}.4
+Release:	0.%{bver}.5
 License:	LGPL
 Group:		Base
 Source0:	ftp://sources.redhat.com/pub/glibc/releases/%{name}-%{version}%{bver}.tar.gz
@@ -82,4 +82,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README THANKS
 %attr(755,root,root) /%{_lib}/*.so
 %attr(755,root,root) %{_bindir}/*
-%config /var/db/Makefile
+%config(noreplace) %verify(not md5 size mtime) /var/db/Makefile
