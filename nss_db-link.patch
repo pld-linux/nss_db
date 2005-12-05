@@ -1,0 +1,15 @@
+--- nss_db-2.2.3pre1/src/Makefile.am~	2005-12-05 18:59:41.933364712 +0100
++++ nss_db-2.2.3pre1/src/Makefile.am	2005-12-05 21:45:54.944990152 +0100
+@@ -23,9 +23,10 @@
+ 	files-ethers.c files-grp.c files-parse.c files-proto.c files-pwd.c \
+ 	files-rpc.c files-service.c files-spwd.c
+ libnss_db_la_LDFLAGS = -version-info $(INTERFACE) \
+-	 -Wl,--version-script=$(srcdir)/libnss_db.map
++	 -Wl,--version-script=$(srcdir)/libnss_db.map \
++	 -Wl,$(slibdir)/libnss_files.so.2
+ libnss_db_la_DEPENDENCIES = libnss_db.map
+-libnss_db_la_LIBADD = @DB_LIBS@ $(slibdir)/libnss_files.so.2
++libnss_db_la_LIBADD = @DB_LIBS@
+ 
+ bin_PROGRAMS = makedb
+ makedb_SOURCES = makedb.c
