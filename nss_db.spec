@@ -3,7 +3,7 @@ Summary(pl):	Modu³ NSS do baz db
 Name:		nss_db
 Version:	2.2.3
 %define	bver	pre1
-Release:	0.%{bver}.3
+Release:	0.%{bver}.4
 License:	LGPL
 Group:		Base
 Source0:	ftp://sources.redhat.com/pub/glibc/releases/%{name}-%{version}%{bver}.tar.gz
@@ -13,6 +13,7 @@ Patch1:		%{name}-amfix.patch
 Patch2:		%{name}-glibc23.patch
 Patch3:		%{name}-db41.patch
 Patch4:		%{name}-errno.patch
+Patch5:		%{name}-link.patch
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4
 BuildRequires:	db-devel >= 3.0
@@ -38,6 +39,7 @@ glibc-2.2.x.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__gettextize}
