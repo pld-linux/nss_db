@@ -82,4 +82,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README THANKS
 %attr(755,root,root) /%{_lib}/*.so
 %attr(755,root,root) %{_bindir}/*
-%config(noreplace) %verify(not md5 size mtime) /var/db/Makefile
+%config(noreplace) %verify(not md5 mtime size) /var/db/Makefile
