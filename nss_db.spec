@@ -1,5 +1,5 @@
 Summary:	Berkeley DB Name Service Switch Module
-Summary(pl):	Modu≥ NSS do baz db
+Summary(pl.UTF-8):   Modu≈Ç NSS do baz db
 Name:		nss_db
 Version:	2.2.3
 %define	bver	pre1
@@ -28,8 +28,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This is nss_db, a name service switch module that can be used with
 glibc-2.2.x.
 
-%description -l pl
-To jest nss_db, modu≥ do serwisu nazw, ktÛry moøe byÊ uøywany z
+%description -l pl.UTF-8
+To jest nss_db, modu≈Ç do serwisu nazw, kt√≥ry mo≈ºe byƒá u≈ºywany z
 glibc-2.2.x.
 
 %prep
