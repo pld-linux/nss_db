@@ -1,5 +1,5 @@
 Summary:	Berkeley DB Name Service Switch Module
-Summary(pl.UTF-8):   Moduł NSS do baz db
+Summary(pl.UTF-8):	Moduł NSS do baz db
 Name:		nss_db
 Version:	2.2.3
 %define	bver	pre1
