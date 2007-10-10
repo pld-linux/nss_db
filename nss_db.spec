@@ -25,7 +25,6 @@ Patch8:		%{name}-initialize.patch
 Patch9:		%{name}-selinux.patch
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4
-BuildRequires:	db-devel >= 3.0
 BuildRequires:	gettext-devel
 BuildRequires:	glibc-devel >= 2.3
 BuildRequires:	libtool
