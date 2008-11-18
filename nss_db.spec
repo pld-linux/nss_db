@@ -6,7 +6,7 @@ Summary(pl.UTF-8):	Moduł NSS do baz db
 Name:		nss_db
 Version:	2.2.3
 %define	bver	pre1
-Release:	0.%{bver}.7
+Release:	0.%{bver}.8
 License:	LGPL
 Group:		Base
 Source0:	ftp://sources.redhat.com/pub/glibc/old-releases/%{name}-%{version}%{bver}.tar.gz
