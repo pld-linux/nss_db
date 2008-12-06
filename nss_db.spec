@@ -6,7 +6,7 @@ Summary(pl.UTF-8):	Moduł NSS do baz db
 Name:		nss_db
 Version:	2.2.3
 %define	bver	pre1
-Release:	0.%{bver}.8
+Release:	0.%{bver}.9
 License:	LGPL
 Group:		Base
 Source0:	ftp://sources.redhat.com/pub/glibc/old-releases/%{name}-%{version}%{bver}.tar.gz
@@ -32,6 +32,10 @@ BuildRequires:	libselinux-devel
 Requires:	glibc >= 2.3
 Requires:	make
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# private symbols
+%define		_noautoprov		.*\(GLIBC_PRIVATE\)
+%define		_noautoreq		.*\(GLIBC_PRIVATE\)
 
 %description
 This is nss_db, a name service switch module that can be used with
@@ -97,6 +101,23 @@ cd ..
 
 %{__make} \
 	slibdir=/%{_lib}
+
+# Check for any problems, since we filter GLIBC_PRIVATE provs
+# in glibc package and deps here
+cat >> test-dlopen.c << _EOF
+#include <dlfcn.h>
+/* Simple program to see if dlopen() would succeed. */
+int main(int argc, char **argv)
+{
+	if (dlopen(argv[1], RTLD_NOW))
+		return 0;
+	return 1;
+}
+_EOF
+
+%{__cc} %{rpmcflags} -o test-dlopen test-dlopen.c -ldl
+
+./test-dlopen src/.libs/libnss_db.so.2.0.0
 
 %install
 rm -rf $RPM_BUILD_ROOT
