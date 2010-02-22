@@ -3,7 +3,7 @@
 %define		db_version	4.6.21
 
 %define		subver		pre1
-%define		rel			10
+%define		rel			11
 Summary:	Berkeley DB Name Service Switch Module
 Summary(pl.UTF-8):	Moduł NSS do baz db
 Name:		nss_db
