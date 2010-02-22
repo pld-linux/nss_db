@@ -1,15 +1,19 @@
-
+# 4.8 makes libpthread a hard requirement
+# 4.7 has a heavier footprint
 %define		db_version	4.6.21
 
+%define		subver		pre1
+%define		rel			10
 Summary:	Berkeley DB Name Service Switch Module
 Summary(pl.UTF-8):	Moduł NSS do baz db
 Name:		nss_db
 Version:	2.2.3
-%define	bver	pre1
-Release:	0.%{bver}.9
-License:	LGPL
+Release:	0.%{subver}.%{rel}
+# DB is under the Sleepycat (Oracle) license.
+# nss_db is under the LGPLv2+ license.
+License:	Sleepycat and LGPL v2+
 Group:		Base
-Source0:	ftp://sources.redhat.com/pub/glibc/old-releases/%{name}-%{version}%{bver}.tar.gz
+Source0:	ftp://sources.redhat.com/pub/glibc/old-releases/%{name}-%{version}%{subver}.tar.gz
 # Source0-md5:	b4440ba2865d28e9068e465426c19ede
 Source1:	http://download.oracle.com/berkeley-db/db-%{db_version}.tar.gz
 # Source1-md5:	718082e7e35fc48478a2334b0bc4cd11
@@ -23,13 +27,17 @@ Patch6:		%{name}-enoent.patch
 Patch7:		%{name}-uniqdb.patch
 Patch8:		%{name}-initialize.patch
 Patch9:		%{name}-selinux.patch
+Patch101:	http://www.oracle.com/technology/products/berkeley-db/db/update/4.6.21/patch.4.6.21.1
+Patch102:	http://www.oracle.com/technology/products/berkeley-db/db/update/4.6.21/patch.4.6.21.2
+Patch103:	http://www.oracle.com/technology/products/berkeley-db/db/update/4.6.21/patch.4.6.21.3
+Patch104:	http://www.oracle.com/technology/products/berkeley-db/db/update/4.6.21/patch.4.6.21.4
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4
 BuildRequires:	gettext-devel
 BuildRequires:	glibc-devel >= 2.3
-BuildRequires:	libtool
 BuildRequires:	libselinux-devel
-Requires:	glibc >= 2.3
+BuildRequires:	libtool
+Requires:	glibc >= 6:2.3
 Requires:	make
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -46,7 +54,7 @@ To jest nss_db, moduł do serwisu nazw, który może być używany z
 glibc-2.2.x.
 
 %prep
-%setup -q -n %{name}-%{version}%{bver} -a1
+%setup -q -n %{name}-%{version}%{subver} -a1
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -59,9 +67,14 @@ glibc-2.2.x.
 %patch9 -p1
 
 mkdir db-build
+cd db-%{db_version}
+%patch101 -p0
+%patch102 -p0
+%patch103 -p0
+%patch104 -p0
 
 %build
-dbdir=`pwd`/db-instroot
+dbdir=$(pwd)/db-instroot
 cd db-build
 
 CC="%{__cc}"
@@ -81,6 +94,12 @@ echo db_cv_mutex=UNIX/fcntl > config.cache
 	--disable-rpc \
 	--disable-tcl \
 	--disable-shared \
+	--disable-cryptography \
+	--disable-hash \
+	--disable-queue \
+	--disable-replication \
+	--disable-statistics \
+	--disable-verify \
 	--with-pic \
 	--with-uniquename=_nssdb \
 	--prefix=$dbdir \
@@ -127,11 +146,12 @@ install -d $RPM_BUILD_ROOT{/%{_lib},/var/db}
 	slibdir=/%{_lib} \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install db-Makefile $RPM_BUILD_ROOT/var/db/Makefile
+rm $RPM_BUILD_ROOT%{_libdir}/libnss_db.so
+cp -a db-Makefile $RPM_BUILD_ROOT/var/db/Makefile
 
-cat << EOF > $RPM_BUILD_ROOT%{_bindir}/create-db
+cat << EOF -> $RPM_BUILD_ROOT%{_bindir}/create-db
 #!/bin/sh
-/usr/bin/make -sC /var/db
+%{__make} -sC /var/db
 EOF
 
 ln -sf create-db $RPM_BUILD_ROOT%{_bindir}/update-db
@@ -147,6 +167,10 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README THANKS
-%attr(755,root,root) /%{_lib}/*.so
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) /%{_lib}/libnss_db-*.so
+%attr(755,root,root) %ghost /%{_lib}/libnss_db.so.2
+%attr(755,root,root) %{_bindir}/create-db
+%attr(755,root,root) %{_bindir}/makedb
+%attr(755,root,root) %{_bindir}/update-db
+
 %config(noreplace) %verify(not md5 mtime size) /var/db/Makefile
