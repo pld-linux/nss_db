@@ -1,13 +1,14 @@
---- nss_db-2.2.3pre1/src/db-compat.c.orig	2001-04-30 03:07:41.000000000 +0200
-+++ nss_db-2.2.3pre1/src/db-compat.c	2004-04-02 23:57:06.562464288 +0200
+--- nss_db-2.2.3pre1/src/db-compat.c	2010-02-22 19:32:31.371616603 +0200
++++ nss_db-2.2.3pre1/src/db-compat.c	2010-02-22 19:32:31.371616603 +0200
 @@ -39,7 +39,11 @@
    if (err)
      return err;
  
+-  err = db->open (db, file, NULL, type, flags, mode);
 +#if (DB_VERSION_MAJOR > 4) || ((DB_VERSION_MAJOR == 4) && (DB_VERSION_MINOR >= 1))
-+  err = db->open (db, NULL, file, NULL, type, flags, mode);
++  err = (db->open) (db, NULL, file, NULL, type, flags, mode);
 +#else
-   err = db->open (db, file, NULL, type, flags, mode);
++  err = (db->open) (db, file, NULL, type, flags, mode);
 +#endif
    if (err)
      {
