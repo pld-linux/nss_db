@@ -1,0 +1,5 @@
+- rel .7
+- build with private copy of libdb (BAD things happen when linked
+  with system db, like static programs suddenly sigsegving)
+- added selinux support for makedb
+- some bugfixes from FC (descriptions in patches)
