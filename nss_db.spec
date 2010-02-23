@@ -34,6 +34,9 @@ Patch103:	http://www.oracle.com/technology/products/berkeley-db/db/update/4.6.21
 Patch104:	http://www.oracle.com/technology/products/berkeley-db/db/update/4.6.21/patch.4.6.21.4
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4
+BuildRequires:	db-devel
+# because of broken configure
+BuildRequires:	gcc-c++
 BuildRequires:	gettext-devel
 BuildRequires:	glibc-devel >= 2.3
 BuildRequires:	libselinux-devel
