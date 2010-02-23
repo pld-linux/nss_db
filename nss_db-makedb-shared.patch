@@ -1,0 +1,24 @@
+--- nss_db-2.2.3pre1/src/libnss_db.map~	2010-02-23 13:09:05.000000000 +0200
++++ nss_db-2.2.3pre1/src/libnss_db.map	2010-02-23 13:09:08.098884892 +0200
+@@ -14,6 +14,8 @@
+     _nss_db_setaliasent; _nss_db_setetherent; _nss_db_setgrent;
+     _nss_db_setnetgrent; _nss_db_setprotoent; _nss_db_setpwent;
+     _nss_db_setrpcent; _nss_db_setservent; _nss_db_setspent;
+-  local:
+-    *;
++};
++NSSDB_PRIVATE {
++  global:
++    *_nssdb;
+ };
+--- nss_db-2.2.3pre1/src/Makefile.am~	2010-02-23 13:11:23.000000000 +0200
++++ nss_db-2.2.3pre1/src/Makefile.am	2010-02-23 13:11:32.562202953 +0200
+@@ -30,7 +30,7 @@
+ 
+ bin_PROGRAMS = makedb
+ makedb_SOURCES = makedb.c
+-makedb_LDADD = db-compat.lo @DB_LIBS@ @SELINUX_LIBS@ @INTLLIBS@
++makedb_LDADD = db-compat.lo libnss_db.la @SELINUX_LIBS@ @INTLLIBS@
+ 
+ # To mimmick the old glibc installation as closely as possible, we
+ # shuffle the installed library and the links to it around a bit,

@@ -28,6 +28,7 @@ Patch7:		%{name}-uniqdb.patch
 Patch8:		%{name}-initialize.patch
 Patch9:		%{name}-selinux.patch
 Patch10:	%{name}-makedb-atomic.patch
+Patch11:	%{name}-makedb-shared.patch
 Patch101:	http://www.oracle.com/technology/products/berkeley-db/db/update/4.6.21/patch.4.6.21.1
 Patch102:	http://www.oracle.com/technology/products/berkeley-db/db/update/4.6.21/patch.4.6.21.2
 Patch103:	http://www.oracle.com/technology/products/berkeley-db/db/update/4.6.21/patch.4.6.21.3
@@ -70,6 +71,7 @@ glibc-2.2.x.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
 mkdir db-build
 cd db-%{db_version}
