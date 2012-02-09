@@ -5,8 +5,8 @@ date: 2008/08/07 16:51:58;  author: nalin;  state: Exp;
 - create and populate new db files, moving them in place afterward (patch
   from Kelsey Cummings, CentOS #1987)
 
---- nss_db-2.2/src/makedb.c	2008-08-04 14:21:06.000000000 -0700
-+++ nss_db-2.2/src/makedb.c	2008-08-04 14:24:08.000000000 -0700
+--- nss_db-2.2/makedb.c	2008-08-04 14:21:06.000000000 -0700
++++ nss_db-2.2/makedb.c	2008-08-04 14:24:08.000000000 -0700
 @@ -31,6 +31,7 @@
  #include <stdlib.h>
  #include <string.h>

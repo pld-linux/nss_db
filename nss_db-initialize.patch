@@ -1,7 +1,8 @@
 Initialize all of the fields of the key to zeroes, so that we don't pass
 garbage keys in to later versions of Berkeley DB.
---- nss_db-2.2/src/db-XXX.c	2005-03-29 16:13:57.103516704 -0500
-+++ nss_db-2.2/src/db-XXX.c	2005-03-29 16:13:47.108821931 -0500
+
+--- nss_db-2.2/db-XXX.c	2005-03-29 16:13:57.103516704 -0500
++++ nss_db-2.2/db-XXX.c	2005-03-29 16:13:47.108821931 -0500
 @@ -225,6 +225,7 @@
    DBT key;								      \
    enum nss_status status;						      \

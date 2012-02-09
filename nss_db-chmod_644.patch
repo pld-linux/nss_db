@@ -1,57 +1,55 @@
-diff -urN nss_db-2.2.orig/db-Makefile nss_db-2.2/db-Makefile
---- nss_db-2.2.orig/db-Makefile	Tue Aug  8 19:42:27 2000
-+++ nss_db-2.2/db-Makefile	Sun Feb 11 14:32:09 2001
-@@ -38,6 +38,7 @@
+--- nss_db-2.5/db-Makefile.in~	2011-12-12 12:25:35.000000000 +0200
++++ nss_db-2.5/db-Makefile.in	2012-02-09 22:41:12.395398440 +0200
+@@ -61,6 +61,7 @@
  		 /^[^#]/ { printf ".%s ", $$1; print; \
  			   printf "=%s ", $$3; print }' $^ | \
  	$(MAKEDB) -o $@ -
 +	chmod 644 $@
- 	@echo "done."
  
- $(VAR_DB)/group.db: /etc/group
-@@ -49,6 +50,7 @@
+ $(GROUP_DB): $(GROUP_SOURCE)
+ 	@echo "$@ ..."
+@@ -71,6 +72,7 @@
  		 /^[^#]/ { printf ".%s ", $$1; print; \
  			   printf "=%s ", $$3; print }' $^ | \
  	$(MAKEDB) -o $@ -
 +	chmod 644 $@
- 	@echo "done."
  
- $(VAR_DB)/ethers.db: /etc/ethers
-@@ -60,6 +62,7 @@
- 		 /^[^#]/ { printf ".%s ", $$1; print; \
- 			   printf "=%s ", $$2; print }' $^ | \
+ $(ETHERS_DB): $(ETHERS_SOURCE)
+ 	@echo "$@ ..."
+@@ -81,6 +83,7 @@
+ 		 /^[^#]/ { printf ".%s ", $$2; print; \
+ 			   printf "=%s ", $$1; print }' $^ | \
  	$(MAKEDB) -o $@ -
 +	chmod 644 $@
- 	@echo "done."
  
- $(VAR_DB)/protocols.db: /etc/protocols
-@@ -73,6 +76,7 @@
+ $(PROTO_DB): $(PROTO_SOURCE)
+ 	@echo "$@ ..."
+@@ -93,6 +96,7 @@
  			   for (i = 3; i <= NF && !($$i ~ /^#/); ++i) \
  			     { printf ".%s ", $$i; print } }' $^ | \
  	$(MAKEDB) -o $@ -
 +	chmod 644 $@
- 	@echo "done."
  
- $(VAR_DB)/rpc.db: /etc/rpc
-@@ -86,6 +90,7 @@
+ $(RPC_DB): $(RPC_SOURCE)
+ 	@echo "$@ ..."
+@@ -105,6 +109,7 @@
  			   for (i = 3; i <= NF && !($$i ~ /^#/); ++i) \
  			     { printf ".%s ", $$i; print } }' $^ | \
  	$(MAKEDB) -o $@ -
 +	chmod 644 $@
- 	@echo "done."
  
- $(VAR_DB)/services.db: /etc/services
-@@ -102,6 +107,7 @@
+ $(SERVICES_DB): $(SERVICES_SOURCE)
+ 	@echo "$@ ..."
+@@ -120,6 +125,7 @@
  			     { printf ".%s/%s ", $$i, $$3; print; \
  			       printf ".%s/ ", $$i; print } }' $^ | \
  	$(MAKEDB) -o $@ -
 +	chmod 644 $@
- 	@echo "done."
  
- $(VAR_DB)/shadow.db: /etc/shadow
-@@ -135,4 +141,5 @@
+ $(SHADOW_DB): $(SHADOW_SOURCE)
+ 	@echo "$@ ..."
+@@ -151,3 +157,4 @@
  			   gsub(/[ \t]+/, " "); \
  			   if(end == 1) printf "%s", $$0; else print }' $^ | \
  	$(MAKEDB) -o $@ -
-+	chmod 640 $@
- 	@echo "done."
++	chmod 644 $@

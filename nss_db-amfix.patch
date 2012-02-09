@@ -1,19 +1,13 @@
---- nss_db-2.2.3pre1/src/Makefile.am.orig	2001-04-30 03:19:31.000000000 +0200
-+++ nss_db-2.2.3pre1/src/Makefile.am	2004-04-02 23:45:50.158293352 +0200
-@@ -28,13 +28,13 @@
- libnss_db_la_LIBADD = @DB_LIBS@ -lnss_files
+--- nss_db-2.5/Makefile.am~	2011-12-12 17:49:46.000000000 +0200
++++ nss_db-2.5/Makefile.am	2012-02-09 22:46:36.176785996 +0200
+@@ -49,8 +49,8 @@
+ endif
  
  bin_PROGRAMS = makedb
--makedb_SOURCES = makedb.c db-compat.c
--makedb_LDADD = @DB_LIBS@ @INTLLIBS@
+-makedb_SOURCES = makedb.c db-compat-copy-makedb.c
+-makedb_LDADD = @DB_LIBS@ @SELINUX_LIBS@ lib/libgnu.a
 +makedb_SOURCES = makedb.c
-+makedb_LDADD = db-compat.lo @DB_LIBS@ @INTLLIBS@
- 
- # To mimmick the old glibc installation as closely as possible, we
- # shuffle the installed library and the links to it around a bit,
- # removing all traces from libtool in the process.
--install-data-local:
-+install-data-hook:
- 	$(mkinstalldirs) $(DESTDIR)$(libdir)
- 	rm $(DESTDIR)$(slibdir)/libnss_db.la
- 	rm $(DESTDIR)$(slibdir)/libnss_db.so
++makedb_LDADD = @DB_LIBS@ @SELINUX_LIBS@  db-compat-copy-makedb.lo lib/libgnu.a
+ makedb_CPPFLAGS = -I$(top_builddir)/lib -I$(top_srcdir)/lib
+ db-compat-copy-makedb.c: db-compat.c
+ 	rm -f $@

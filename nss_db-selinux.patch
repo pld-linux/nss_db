@@ -55,8 +55,8 @@ Note that this does *not* change the context of existing files.
  AC_SUBST(slibdir)
  
  dnl Internationalization macros.
---- nss_db-2.2.3pre1/src/Makefile.am~	2010-02-22 19:20:49.000000000 +0200
-+++ nss_db-2.2.3pre1/src/Makefile.am	2010-02-22 19:22:25.691737306 +0200
+--- nss_db-2.2.3pre1/Makefile.am~	2010-02-22 19:20:49.000000000 +0200
++++ nss_db-2.2.3pre1/Makefile.am	2010-02-22 19:22:25.691737306 +0200
 @@ -30,7 +30,7 @@
  
  bin_PROGRAMS = makedb
@@ -66,8 +66,8 @@ Note that this does *not* change the context of existing files.
  
  # To mimmick the old glibc installation as closely as possible, we
  # shuffle the installed library and the links to it around a bit,
---- nss_db-2.2.3/src/makedb.c	2004-10-20 13:52:02.814327392 -0400
-+++ nss_db-2.2.3/src/makedb.c	2004-10-20 14:06:07.605899552 -0400
+--- nss_db-2.2.3/makedb.c	2004-10-20 13:52:02.814327392 -0400
++++ nss_db-2.2.3/makedb.c	2004-10-20 14:06:07.605899552 -0400
 @@ -32,6 +32,10 @@
  #include <string.h>
  #include <sys/stat.h>

@@ -1,23 +1,23 @@
 # TODO
 # - new usptream: http://sourceforge.net/projects/nssdb/
 #   see http://www.linux-archive.org/development-discussions-related-fedora-devel-lists-fedoraproject-org/546891-nss_db.html
+# - think of how to install with glibc 2.15
 # 4.8 makes libpthread a hard requirement
 # 4.7 has a heavier footprint
 %define		db_version	4.6.21
 
-%define		subver		pre1
-%define		rel			11
 Summary:	Berkeley DB Name Service Switch Module
 Summary(pl.UTF-8):	Moduł NSS do baz db
 Name:		nss_db
-Version:	2.2.3
-Release:	0.%{subver}.%{rel}
+Version:	2.5
+Release:	0.1
 # DB is under the Sleepycat (Oracle) license.
 # nss_db is under the LGPLv2+ license.
 License:	Sleepycat and LGPL v2+
 Group:		Base
-Source0:	ftp://sources.redhat.com/pub/glibc/old-releases/%{name}-%{version}%{subver}.tar.gz
-# Source0-md5:	b4440ba2865d28e9068e465426c19ede
+URL:		http://sourceforge.net/projects/nssdb/
+Source0:	http://downloads.sourceforge.net/nssdb/%{name}-%{version}.tar.gz
+# Source0-md5:	5216e844559cd5aad1823f8de2269bf6
 Source1:	http://download.oracle.com/berkeley-db/db-%{db_version}.tar.gz
 # Source1-md5:	718082e7e35fc48478a2334b0bc4cd11
 Patch0:		%{name}-chmod_644.patch
@@ -62,18 +62,18 @@ To jest nss_db, moduł do serwisu nazw, który może być używany z
 glibc-2.2.x.
 
 %prep
-%setup -q -n %{name}-%{version}%{subver} -a1
+%setup -q -a1
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
+#%patch2 -p1 # seems obsolete
+#%patch3 -p1 # obsolete
+#%patch4 -p1 obsolete
 %patch5 -p1
 %patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
+#%patch7 -p1 applied
+#%patch8 -p1 applied
+#%patch9 -p1 applied
+#%patch10 -p1 applied
 %patch11 -p1
 
 mkdir db-build
@@ -118,9 +118,9 @@ echo db_cv_mutex=UNIX/fcntl > config.cache
 %{__make} install
 cd ..
 
-%{__gettextize}
+#%{__gettextize}
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
