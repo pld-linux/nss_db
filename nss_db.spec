@@ -48,7 +48,6 @@ BuildRequires:	libtool
 Requires:	glibc >= 6:2.3
 Requires:	make
 Requires(post):	/sbin/ldconfig
-Requires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # glibc private symbols
@@ -172,24 +171,7 @@ ln -sf create-db $RPM_BUILD_ROOT%{_bindir}/update-db
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-/sbin/ldconfig
-if [ -f %{_sysconfdir}/nsswitch.conf ]; then
-	%{__sed} -i -e '
-		/^\(passwd\|group\|hosts\):/ !b
-		/\<db\>/ b
-		s/[[:blank:]]*$/ db/
-	' %{_sysconfdir}/nsswitch.conf
-fi
-
-%preun
-if [ "$1" -eq 0 -a -f %{_sysconfdir}/nsswitch.conf ] ; then
-	%{__sed} -i -e '
-		/^\(passwd\|group\|ethers\|protocols\|rpc\|services\|shadow\|netgroup\|hosts\):/ !b
-		s/[[:blank:]]\+db\>//
-	' %{_sysconfdir}/nsswitch.conf
-fi
-
+%post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files -f %{name}.lang
