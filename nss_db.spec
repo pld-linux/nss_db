@@ -1,3 +1,6 @@
+# TODO
+# - new usptream: http://sourceforge.net/projects/nssdb/
+#   see http://www.linux-archive.org/development-discussions-related-fedora-devel-lists-fedoraproject-org/546891-nss_db.html
 # 4.8 makes libpthread a hard requirement
 # 4.7 has a heavier footprint
 %define		db_version	4.6.21
@@ -36,14 +39,15 @@ Patch104:	http://www.oracle.com/technology/products/berkeley-db/db/update/4.6.21
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4
 BuildRequires:	db-devel
-# because of broken configure
-BuildRequires:	gcc-c++
 BuildRequires:	gettext-devel
 BuildRequires:	glibc-devel >= 2.3
 BuildRequires:	libselinux-devel
+# because of broken configure
+BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 Requires:	glibc >= 6:2.3
 Requires:	make
+Requires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # private symbols
@@ -170,6 +174,23 @@ rm -rf $RPM_BUILD_ROOT
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
+
+%post
+if [ -f %{_sysconfdir}/nsswitch.conf ]; then
+	%{__sed} -i -e '
+		/^\(passwd\|group\|hosts\):/ !b
+		/\<db\>/ b
+		s/[[:blank:]]*$/ db/
+	' %{_sysconfdir}/nsswitch.conf
+fi
+
+%preun
+if [ "$1" -eq 0 -a -f %{_sysconfdir}/nsswitch.conf ] ; then
+	%{__sed} -i -e '
+		/^\(passwd\|group\|ethers\|protocols\|rpc\|services\|shadow\|netgroup\|hosts\):/ !b
+		s/[[:blank:]]\+db\>//
+	' %{_sysconfdir}/nsswitch.conf
+fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
