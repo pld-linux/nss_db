@@ -47,12 +47,12 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 Requires:	glibc >= 6:2.3
 Requires:	make
+Requires(post):	/sbin/ldconfig
 Requires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-# private symbols
-%define		_noautoprov		.*\(GLIBC_PRIVATE\)
-%define		_noautoreq		.*\(GLIBC_PRIVATE\)
+# glibc private symbols
+%define		_noautoreq		.*(GLIBC_PRIVATE)
 
 %description
 This is nss_db, a name service switch module that can be used with
@@ -172,10 +172,8 @@ ln -sf create-db $RPM_BUILD_ROOT%{_bindir}/update-db
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
 %post
+/sbin/ldconfig
 if [ -f %{_sysconfdir}/nsswitch.conf ]; then
 	%{__sed} -i -e '
 		/^\(passwd\|group\|hosts\):/ !b
@@ -191,6 +189,8 @@ if [ "$1" -eq 0 -a -f %{_sysconfdir}/nsswitch.conf ] ; then
 		s/[[:blank:]]\+db\>//
 	' %{_sysconfdir}/nsswitch.conf
 fi
+
+%postun -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
