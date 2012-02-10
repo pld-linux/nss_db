@@ -1,7 +1,7 @@
 # TODO
 # - new usptream: http://sourceforge.net/projects/nssdb/
 #   see http://www.linux-archive.org/development-discussions-related-fedora-devel-lists-fedoraproject-org/546891-nss_db.html
-# - think of how to install with glibc 2.15
+# - think of how to install with glibc 2.15: rename to nss_bdb, use /var/bdb (latter not FHS compatible?)
 # 4.8 makes libpthread a hard requirement
 # 4.7 has a heavier footprint
 %define		db_version	4.6.21
