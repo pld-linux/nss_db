@@ -65,15 +65,15 @@ glibc-2.2.x.
 %setup -q -a1
 %patch -P0 -p1
 %patch -P1 -p1
-#%patch2 -p1 # seems obsolete
-#%patch3 -p1 # obsolete
-#%patch4 -p1 obsolete
+#%%patch2 -p1 # seems obsolete
+#%%patch3 -p1 # obsolete
+#%%patch4 -p1 obsolete
 %patch -P5 -p1
 %patch -P6 -p1
-#%patch7 -p1 applied
-#%patch8 -p1 applied
-#%patch9 -p1 applied
-#%patch10 -p1 applied
+#%%patch7 -p1 applied
+#%%patch8 -p1 applied
+#%%patch9 -p1 applied
+#%%patch10 -p1 applied
 %patch -P11 -p1
 
 mkdir db-build
